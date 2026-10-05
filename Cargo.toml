@@ -1,0 +1,16 @@
+[package]
+name = "nativeon"
+version = "0.1.0"
+edition = "2021"
+authors = ["NATIVEON Engineers"]
+description = "NATIVEON: Ground-up AMD GPU Native AI Architecture and Runtime Engine"
+
+[dependencies]
+
+[[bin]]
+name = "nativeon"
+path = "src/main.rs"
+
+[lib]
+name = "nativeon"
+path = "src/lib.rs"

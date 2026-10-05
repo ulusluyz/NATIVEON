@@ -1,0 +1,6 @@
+NATIVEON Model & Weights License (MIT License)
+
+Copyright (c) 2025 NATIVEON Project Contributors
+
+This license covers the WaveState SIMD Recurrent Network architecture, training pipeline,
+inference engine, and model weight checkpoints.

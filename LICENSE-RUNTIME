@@ -1,0 +1,6 @@
+NATIVEON Runtime License (MIT License)
+
+Copyright (c) 2025 NATIVEON Project Contributors
+
+This license covers the low-level GPU runtime engine, AMDGPU ISA encoder/decoder,
+CPU wavefront simulator, compute primitives, and execution scheduler.
