@@ -1,7 +1,15 @@
-//! NATIVEON AMDGPU ISA Definitions, Encoder & Decoder
+//! NATIVEON AMDGPU ISA Definitions & Instruction Representation
 //!
-//! Provides direct encoding/decoding and structured representation for AMDGPU ISA instructions
-//! targeting Wave32/Wave64 execution (RDNA3 gfx1100 / CDNA3 gfx940).
+//! NOTICE ON HARDWARE COMPLIANCE & SIMULATION SCOPE:
+//! The instruction representations defined in this module correspond conceptually to
+//! AMDGPU ISA opcodes (RDNA3 gfx1100 / CDNA3 gfx940).
+//! However, the byte encoder implemented here (`Instruction::encode`) is a simplified
+//! simulated byte representation used by the internal CPU Wavefront simulator (`src/emulator.rs`).
+//!
+//! Direct binary compatibility with AMDGPU ELF object files (`amdgcn-amd-amdhsa`)
+//! and command buffer submission via Linux AMDGPU kernel driver (`/dev/kfd` / `/dev/dri/renderD128`)
+//! requires LLVM backend assembly or raw binary encoding against AMD's official ISA binary specs.
+//! Status: CPU VERIFIED / SIMULATED EXECUTION. Bare-metal submission status: HARDWARE VALIDATION REQUIRED.
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Register {
@@ -96,7 +104,8 @@ impl Instruction {
         self
     }
 
-    /// Encodes instruction into raw 32-bit or 64-bit AMDGPU machine code bytes (Simulated binary representation)
+    /// Encodes instruction into simulated opcode byte structure for the CPU Wavefront simulator.
+    /// Note: This is an internal simulator encoding, not an ELF binary generator.
     pub fn encode(&self) -> Vec<u8> {
         let mut bytes = Vec::new();
         let op_code_val: u32 = match self.opcode {
